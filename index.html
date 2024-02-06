@@ -1,10 +1,12 @@
+<!--
+    Simple static Telegram WebApp. Does not verify the WebAppInitData, as a bot token would be needed for that.
+-->
 <!DOCTYPE html>
-<html lang="en-US" itemscope="itemscope" itemtype="http://schema.org/WebPage">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Pizzaro</title>
-      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" media="all" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>python-telegram-bot Example WebApp</title>
+   <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" media="all" />
       <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" media="all" />
       <link rel="stylesheet" type="text/css" href="assets/css/animate.min.css" media="all" />
       <link rel="stylesheet" type="text/css" href="assets/css/font-pizzaro.css" media="all" />
@@ -24,8 +26,29 @@
       <!-- Demo Purpose Only. Should be removed in production : END -->      
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CYanone+Kaffeesatz:200,300,400,700" rel="stylesheet">
       <link rel="shortcut icon" href="assets/images/fav-icon.png">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+</head>
+<script type="text/javascript">
+    const colorPicker = new iro.ColorPicker('#picker', {
+        borderColor: "#ffffff",
+        borderWidth: 1,
+        width: Math.round(document.documentElement.clientWidth / 2),
+    });
+    colorPicker.on('color:change', function (color) {
+        document.body.style.background = color.hexString;
+    });
+
+    Telegram.WebApp.ready();
+    Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
+        const data = JSON.stringify({hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb});
+        Telegram.WebApp.sendData(data);
+        Telegram.WebApp.close();
+    });
+</script>
+<body style="background-color: #ffffff">
+      
    </head>
-   
    <body class="full-width grid-view columns-3 archive woocommerce-page">
       <div id="page" class="hfeed site">
          <header id="masthead" class="site-header header-v1"  style="background-image: none; ">
@@ -101,14 +124,7 @@
                                  </div>
                               </div>
                               <br><br>
-                              order button
-
-<button class="telegram-button">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: blue; transform: ;msFilter:;"><path d="M13 13h2v-2.99h2.99v-2H15V5.03h-2v2.98h-2.99v2H13V13z"></path><path d="M10 17h8a1 1 0 0 0 .93-.64L21.76 9h-2.14l-2.31 6h-6.64L6.18 4.23A2 2 0 0 0 4.33 3H2v2h2.33l4.75 11.38A1 1 0 0 0 10 17z"></path></svg>
-    Share on Telegram
-</button>
-
-                              <!-- /.product-outer --><br><br><br>
+              <!-- /.product-outer --><br><br><br>
                            </li>
 
                         </ul>
@@ -122,31 +138,6 @@
          </div>
       </div>
 
-<script type="text/javascript">
-   const orderButton = document.querySelector('.button.product_type_simple');
-   
-   orderButton.addEventListener('click', () => {
-       Telegram.WebApp.MainButton.show();
-       Telegram.WebApp.MainButton.setText('Order');
-       Telegram.WebApp.MainButton.onClick(function () {
-           const data = JSON.stringify({ order: "Products: \nPizza\nBurger" });
-           Telegram.WebApp.sendData(data);
-           Telegram.WebApp.close();
-       });
-   });
-
-</script>
-      <script>
-         const telegramButton = document.querySelector('.telegram-button');
-
-telegramButton.addEventListener('click', () => {
-    Telegram.WebApp.open();
-});
-
-      </script>
-<script type="text/javascript">
-    Telegram.WebApp.expand();
-</script>
       <!-- For demo purposes – can be removed on production : End -->
       <script type="text/javascript" src="assets/js/jquery.min.js"></script>
       <script type="text/javascript" src="assets/js/tether.min.js"></script>
@@ -158,7 +149,15 @@ telegramButton.addEventListener('click', () => {
       <script type="text/javascript" src="assets/js/scripts.min.js"></script>
       <!-- For demo purposes – can be removed on production -->
       <script src="switchstylesheet/switchstylesheet.js"></script>
-      <script src="https://telegram.org/js/telegram-web-app.js"></script>
-      <!-- For demo purposes – can be removed on production : End -->
-   </body>
+
+   
+<div style="position: absolute; margin-top: 5vh; margin-left: 5vw; height: 90vh; width: 90vw; border-radius: 5vh; background-color: var(--tg-theme-bg-color); box-shadow: 0 0 2vw
+ #000000;">
+    <div id="picker"
+         style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%"></div>
+</div>
+</body>
+<script type="text/javascript">
+    Telegram.WebApp.expand();
+</script>
 </html>
