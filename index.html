@@ -101,9 +101,13 @@
                                  </div>
                               </div>
                               <br><br>
-<div id="picker"
-         style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%"></div>
-</div>
+                              order button
+
+<button class="telegram-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: blue; transform: ;msFilter:;"><path d="M13 13h2v-2.99h2.99v-2H15V5.03h-2v2.98h-2.99v2H13V13z"></path><path d="M10 17h8a1 1 0 0 0 .93-.64L21.76 9h-2.14l-2.31 6h-6.64L6.18 4.23A2 2 0 0 0 4.33 3H2v2h2.33l4.75 11.38A1 1 0 0 0 10 17z"></path></svg>
+    Share on Telegram
+</button>
+
                               <!-- /.product-outer --><br><br><br>
                            </li>
 
@@ -117,26 +121,29 @@
             <!-- .col-full -->
          </div>
       </div>
-<div id="picker" style="position: absolute; margin-top: 5vh; margin-left: 5vw; height: 90vh; width: 90vw; border-radius: 5vh; background-color: var(--tg-theme-bg-color); box-shadow: 0 0 2vw #000000;">
-    <div style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%"></div>
-</div>
-<script type="text/javascript">
-    const colorPicker = new iro.ColorPicker('#picker', {
-        borderColor: "#ffffff",
-        borderWidth: 1,
-        width: Math.round(document.documentElement.clientWidth / 2),
-    });
-    colorPicker.on('color:change', function (color) {
-        document.body.style.background = color.hexString;
-    });
 
-    Telegram.WebApp.ready();
-    Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
-        const data = JSON.stringify({hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb});
-        Telegram.WebApp.sendData(data);
-        Telegram.WebApp.close();
-    });
+<script type="text/javascript">
+   const orderButton = document.querySelector('.button.product_type_simple');
+   
+   orderButton.addEventListener('click', () => {
+       Telegram.WebApp.MainButton.show();
+       Telegram.WebApp.MainButton.setText('Order');
+       Telegram.WebApp.MainButton.onClick(function () {
+           const data = JSON.stringify({ order: "Products: \nPizza\nBurger" });
+           Telegram.WebApp.sendData(data);
+           Telegram.WebApp.close();
+       });
+   });
+
 </script>
+      <script>
+         const telegramButton = document.querySelector('.telegram-button');
+
+telegramButton.addEventListener('click', () => {
+    Telegram.WebApp.open();
+});
+
+      </script>
 <script type="text/javascript">
     Telegram.WebApp.expand();
 </script>
