@@ -30,18 +30,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 <script type="text/javascript">
-    const colorPicker = new iro.ColorPicker('#picker', {
-        borderColor: "#ffffff",
-        borderWidth: 1,
-        width: Math.round(document.documentElement.clientWidth / 2),
-    });
-    colorPicker.on('color:change', function (color) {
-        document.body.style.background = color.hexString;
-    });
-
     Telegram.WebApp.ready();
-    Telegram.WebApp.MainButton.setText('Choose Color').show().onClick(function () {
-        const data = JSON.stringify({hex: colorPicker.color.hexString, rgb: colorPicker.color.rgb});
+    Telegram.WebApp.MainButton.setText('Order').show().onClick(function () {
+        const data = JSON.stringify({hex: "hello"});
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
     });
@@ -50,6 +41,8 @@
       
    </head>
    <body class="full-width grid-view columns-3 archive woocommerce-page">
+       <div style="position: absolute; margin-top: 5vh; margin-left: 5vw; height: 90vh; width: 90vw; border-radius: 5vh; background-color: var(--tg-theme-bg-color); box-shadow: 0 0 2vw
+ #000000;">
       <div id="page" class="hfeed site">
          <header id="masthead" class="site-header header-v1"  style="background-image: none; ">
             <div class="col-full">
@@ -151,8 +144,7 @@
       <script src="switchstylesheet/switchstylesheet.js"></script>
 
    
-<div style="position: absolute; margin-top: 5vh; margin-left: 5vw; height: 90vh; width: 90vw; border-radius: 5vh; background-color: var(--tg-theme-bg-color); box-shadow: 0 0 2vw
- #000000;">
+
     <div id="picker"
          style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%"></div>
 </div>
