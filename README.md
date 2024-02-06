@@ -1,1 +1,0 @@
-# salohiddinusmonaliyev.github.io
