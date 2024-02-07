@@ -25,17 +25,18 @@
       <!-- Demo Purpose Only. Should be removed in production : END -->      
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CYanone+Kaffeesatz:200,300,400,700" rel="stylesheet">
       <link rel="shortcut icon" href="assets/images/fav-icon.png">
+      <script src="https://telegram.org/js/telegram-web-app.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
    </head>
-
-   <body class="woocommerce-cart">
-      <script type="text/javascript">
-         Telegram.WebApp.ready();
-         Telegram.WebApp.MainButton.setText('Buyurtma qilish').show().onClick(function () {
+   <script type="text/javascript">
+      Telegram.WebApp.ready();
+      Telegram.WebApp.MainButton.setText('Buyurtma qilish').show().onClick(function () {
              const data = JSON.stringify({hex: "Buyurtma tez orada yetkaziladi"});
              Telegram.WebApp.sendData(data);
              Telegram.WebApp.close();
          });
-     </script>
+  </script>
+   <body class="woocommerce-cart">
       <div id="page" class="hfeed site">
          <header id="masthead" class="site-header header-v1"  style="background-image: none; ">
             <div class="col-full">
@@ -208,14 +209,14 @@
       <script type="text/javascript" src="assets/js/scripts.min.js"></script>
       <!-- For demo purposes – can be removed on production -->
       <script src="switchstylesheet/switchstylesheet.js"></script>
-      <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-    <script type="text/javascript">
-      Telegram.WebApp.expand();
-  </script>
+      
+    
       <!-- For demo purposes – can be removed on production : End -->
       <div id="picker"
          style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%"></div>
 </div>
+<script type="text/javascript">
+   Telegram.WebApp.expand();
+</script>
    </body>
 </html>
