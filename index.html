@@ -32,7 +32,7 @@
 <script type="text/javascript">
     Telegram.WebApp.ready();
     Telegram.WebApp.MainButton.setText('Order').show().onClick(function () {
-        const data = JSON.stringify({hex: "hello"});
+        const data = JSON.stringify({hex: "Buyurtma"});
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
     });
@@ -40,9 +40,8 @@
 <body style="background-color: #ffffff">
       
    </head>
-   <body class="full-width grid-view columns-3 archive woocommerce-page">
-       <div style="position: absolute; margin-top: 5vh; margin-left: 5vw; height: 90vh; width: 90vw; border-radius: 5vh; background-color: var(--tg-theme-bg-color); box-shadow: 0 0 2vw
- #000000;">
+   <body class="full-width grid-view columns-3 archive woocommerce-page" style="position: absolute; background-color: var(--tg-theme-bg-color);">
+       <div>
       <div id="page" class="hfeed site">
          <header id="masthead" class="site-header header-v1"  style="background-image: none; ">
             <div class="col-full">
