@@ -31,10 +31,8 @@
 </head>
 <script type="text/javascript">
     Telegram.WebApp.ready();
-    Telegram.WebApp.MainButton.setText('Order').show().onClick(function () {
-        const data = JSON.stringify({hex: "Buyurtma"});
-        Telegram.WebApp.sendData(data);
-        Telegram.WebApp.close();
+    Telegram.WebApp.MainButton.setText('List').show().onClick(function () {
+         window.location.href = 'checkout.html';
     });
 </script>
    <body class="full-width grid-view columns-3 archive woocommerce-page" style="position: absolute; background-color: var(--tg-theme-bg-color);">
