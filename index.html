@@ -31,9 +31,11 @@
 </head>
 <script type="text/javascript">
     Telegram.WebApp.ready();
-    Telegram.WebApp.MainButton.setText('List').show().onClick(function () {
-         window.location.href = 'checkout.html';
-    });
+      Telegram.WebApp.MainButton.setText('Buyurtma qilish').show().onClick(function () {
+             const data = JSON.stringify({hex: "Buyurtma tez orada yetkaziladi"});
+             Telegram.WebApp.sendData(data);
+             Telegram.WebApp.close();
+         });
 </script>
 <body style="background-color: #ffffff">
       
