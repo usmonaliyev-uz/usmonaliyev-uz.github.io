@@ -1,40 +1,4 @@
-/*!
-Template Name:      Pizzaro
-Template URI:       https://transvelo.github.io/pizzaro-html/
-Author:             CheThemes
-Author URI:         https://chethemes.com
-Description:        Pizzaro is the perfect HTML Template for your eCommerce project. Designed and developed by CheThemes, it features several layout & color options to personalise your shop, a responsive design and much more. Developers will love it's lean and extensible codebase making it a joy to customise and extend. Looking for a eCommerce Template? Look no further!
-Version:            1.0.1
-GitHub URI:         https://github.com/Transvelo/pizzaro-html
-GitHub Branch:      Template
-License:            GNU General Public License v2 or later
-License URI:        http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain:        pizzaro
-Tags:               two-columns, left-sidebar, right-sidebar, custom-background, custom-colors, custom-header, custom-menu, featured-images, full-width-template, threaded-comments, accessibility-ready, rtl-language-support
 
-This Template, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
-
-Pizzaro is based on Underscores http://underscores.me/, (C) 2012-2014 Automattic, Inc.
-
-Resetting and rebuilding styles have been helped along thanks to the fine work of
-Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
-along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
-
-All sizing (typography, layout, padding/margins etc) are inspired by a modular scale that uses 14px/16px as base sizes with a 1.618 ratio.
-We use the excellent modular scale tool built by Tim Brown to calculate this. http://modularscale.com/scale/?px1=14&px2=12&ra1=1.618&ra2=0
-
-FontAwesome License: SIL Open Font License - http://scripts.sil.org/OFL
-Images License: GNU General Public License v2 or later
-*/
-/*!
- * normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
- */
-/**
- * 1. Set default font family to sans-serif.
- * 2. Prevent iOS and IE text size adjust after device orientation change,
- *    without disabling user zoom.
- */
  html {
     font-family: sans-serif;
     /* 1 */
@@ -5309,7 +5273,7 @@ Images License: GNU General Public License v2 or later
     text-align: right;
     clear: both; }
     table.shop_table_responsive tr td:before {
-      content: attr(data-title) ': ';
+
       font-weight: 700;
       float: left; }
     table.shop_table_responsive tr td.product-remove a {
