@@ -29,32 +29,6 @@
       <link rel="shortcut icon" href="assets/images/fav-icon.png">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-    <script type="text/javascript">
-    Telegram.WebApp.ready();
-    
-    Telegram.WebApp.MainButton.setText('Order').show().onClick(function () {
-        // Gather information about products in the basket
-        var basketTable = document.getElementById('shopping-basket').getElementsByTagName('tbody')[0];
-        var products = [];
-        for (var i = 0; i < basketTable.rows.length; i++) {
-            var row = basketTable.rows[i];
-            var productName = row.cells[1].innerText.trim();
-            var productPrice = parseFloat(row.cells[2].innerText.replace('$', ''));
-            var productQuantity = parseInt(row.cells[3].getElementsByTagName('input')[0].value);
-            products.push({name: productName, price: productPrice, quantity: productQuantity});
-        }
-        
-        // Prepare the data to be sent
-        var data = JSON.stringify({products: products});
-        
-        // Send the data via the Telegram Web App
-        Telegram.WebApp.sendData(data);
-        
-        // Close the Telegram Web App after sending the data
-        Telegram.WebApp.close();
-    });
-</script>
-
     <style>
         /* Add your CSS styles here */
         table {
@@ -81,6 +55,63 @@
             width: 20px;
             height: 20px;
         }
+    </style>
+    <style>
+        /* Add your CSS styles here */
+
+        /* Basic styles */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .product-thumbnail img {
+            max-width: 100px;
+            height: auto;
+        }
+        .product-remove svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Responsive styles */
+        @media only screen and (max-width: 768px) {
+            /* Adjustments for smaller screens */
+            /* For example, you can make the product images smaller */
+            .product-thumbnail img {
+                max-width: 60px;
+            }
+
+            /* Hide the thead */
+            table thead {
+                display: none;
+            }
+
+            /* Make tbody a column */
+            table tbody {
+                display: flex;
+                flex-direction: column;
+            }
+            table tbody tr {
+                margin-bottom: 8px; /* Add some space between rows */
+            }
+            .cartb {
+                position: relative;
+                left: -25px;
+            }
+            .cellNumber {
+                display: none;
+            }
+        }
+
+        /* Add more responsive styles as needed */
     </style>
 </head>
 <body>
@@ -112,7 +143,7 @@
                       </div>
                    </div>
                 </header>
-    <div style="width: 80%; margin: 0 auto">
+    <div class="cartb" style="width: 80%; margin: 0 auto">
         <table>
             <thead>
                 <tr>
@@ -124,16 +155,21 @@
             </thead>
             <tbody>
                 <tr class="product-item">
-                    <td>1</td>
+                    <td>2</td>
                     <td class="product-thumbnail">
                         <img src="assets/images/products/p1.jpg" alt=""/>
                     </td>
-                    <td class="product-name">
-                        <a href="#">Bacon Burger</a>
-                        <p><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&#036;</span>25.90</span></p>
+                    <td class="product-name"  style="position: relative; padding: 5px; background: none">
+                        <a href="#">Bacon Burger 1</a>
+                        <p><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&#036;</span>20</span></p>
                     </td>
                     <td class="product-add-to-basket">
-                        <button onclick="addToBasket(this)">Add</button>
+                        <button style="position: relative; padding: 1px; background: none" onclick="addToBasket(this)"><script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/zrkkrrpl.json"
+    trigger="hover"
+    style="width:40px;height:40px">
+</lord-icon></button>
                     </td>
                 </tr>
                 <tr class="product-item">
@@ -141,12 +177,17 @@
                     <td class="product-thumbnail">
                         <img src="assets/images/products/p1.jpg" alt=""/>
                     </td>
-                    <td class="product-name">
+                    <td class="product-name"  style="position: relative; padding: 5px; background: none">
                         <a href="#">Bacon Burger 2</a>
                         <p><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&#036;</span>10</span></p>
                     </td>
                     <td class="product-add-to-basket">
-                        <button onclick="addToBasket(this)">Add</button>
+                        <button style="position: relative; padding: 1px; background: none" onclick="addToBasket(this)"><script src="https://cdn.lordicon.com/lordicon.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/zrkkrrpl.json"
+    trigger="hover"
+    style="width:40px;height:40px">
+</lord-icon></button>
                     </td>
                 </tr>
             </tbody>
@@ -202,9 +243,9 @@
     cellNumber.innerHTML = basketTable.rows.length;
     cellName.innerHTML = productName;
     cellPrice.innerHTML = '$' + productPrice.toFixed(2);
-    cellQuantity.innerHTML = '<input type="number" value="1" min="1" onchange="updateTotal(this)">';
+    cellQuantity.innerHTML = '<input type="number" style="position: relative; padding: 1px; background: none; width: 45px" value="1" min="1" onchange="updateTotal(this)">';
     cellTotal.innerHTML = '$' + productPrice.toFixed(2);
-    cellRemove.innerHTML = '<button onclick="removeCartItem(this)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: white;transform: ;msFilter:;"><path d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"></path><path d="M9 10h2v8H9zm4 0h2v8h-2z"></path></svg></button>';
+    cellRemove.innerHTML = '<button style="position: relative; padding: 1px; background: none" onclick="removeCartItem(this)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #c00a27;transform: ;msFilter:;"><path d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"></path><path d="M9 10h2v8H9zm4 0h2v8h-2z"></path></svg></button>';
 }
 
         function removeCartItem(button) {
