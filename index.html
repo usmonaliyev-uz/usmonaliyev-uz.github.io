@@ -1,321 +1,327 @@
-<!--
-    Simple static Telegram WebApp. Does not verify the WebAppInitData, as a bot token would be needed for that.
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>python-telegram-bot Example WebApp</title>
-   <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" media="all" />
-      <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" media="all" />
-      <link rel="stylesheet" type="text/css" href="assets/css/animate.min.css" media="all" />
-      <link rel="stylesheet" type="text/css" href="assets/css/font-pizzaro.css" media="all" />
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css" media="all" />
-      <link rel="stylesheet" type="text/css" href="assets/css/colors/red.css" media="all" />
-      <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.min.css" media="all" />
-      <!-- Demo Purpose Only. Should be removed in production -->
-      <link rel="stylesheet" href="assets/css/config.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-      <link href="assets/css/colors/green.css" rel="alternate stylesheet" title="Green color">
-      <link href="assets/css/colors/pink.css" rel="alternate stylesheet" title="Pink color">
-      <link href="assets/css/colors/blue.css" rel="alternate stylesheet" title="Blue color">
-      <link href="assets/css/colors/red.css" rel="alternate stylesheet" title="Red color">
-      <link href="assets/css/colors/orange.css" rel="alternate stylesheet" title="Orange color">
-      <link href="assets/css/colors/gold.css" rel="alternate stylesheet" title="Gold color">
-      <link href="assets/css/colors/navy.css" rel="alternate stylesheet" title="Navy color">
-      <link href="assets/css/colors/flat-blue.css" rel="alternate stylesheet" title="Flat Blue color">
-      <!-- Demo Purpose Only. Should be removed in production : END -->
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CYanone+Kaffeesatz:200,300,400,700" rel="stylesheet">
-      <link rel="shortcut icon" href="assets/images/fav-icon.png">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-    <script type="text/javascript">
-    Telegram.WebApp.ready();
-    
-    Telegram.WebApp.MainButton.setText('Order').show().onClick(function () {
-        // Gather information about products in the basket
-        var basketTable = document.getElementById('shopping-basket').getElementsByTagName('tbody')[0];
-        var products = [];
-        for (var i = 0; i < basketTable.rows.length; i++) {
-            var row = basketTable.rows[i];
-            var productName = row.cells[1].innerText.trim();
-            var productPrice = parseFloat(row.cells[2].innerText.replace('$', ''));
-            var productQuantity = parseInt(row.cells[3].getElementsByTagName('input')[0].value);
-            products.push({name: productName, price: productPrice, quantity: productQuantity});
-        }
-        
-        // Prepare the data to be sent
-        var data = JSON.stringify({products: products});
-        
-        // Send the data via the Telegram Web App
-        Telegram.WebApp.sendData(data);
-        
-        // Close the Telegram Web App after sending the data
-        Telegram.WebApp.close();
-    });
-</script>
+	<meta charset="utf-8">
+	<title>DurgerKingExampleBot</title>
+	<meta name="viewport"
+	      content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="MobileOptimized" content="176"/>
+	<meta name="HandheldFriendly" content="True"/>
+	<meta name="robots" content="noindex, nofollow"/>
+	<script src="https://tg.dev/js/telegram-web-app.js?7"></script>
 
-    <style>
-        /* Add your CSS styles here */
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .product-thumbnail img {
-            width: 100px;
-            height: auto;
-        }
-
-        .product-remove svg {
-            width: 20px;
-            height: 20px;
-        }
-    </style>
-    <style>
-        /* Add your CSS styles here */
-
-        /* Basic styles */
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .product-thumbnail img {
-            max-width: 100px;
-            height: auto;
-        }
-        .product-remove svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Responsive styles */
-        @media only screen and (max-width: 768px) {
-            /* Adjustments for smaller screens */
-            /* For example, you can make the product images smaller */
-            .product-thumbnail img {
-                max-width: 60px;
-            }
-
-            /* Hide the thead */
-            table thead {
-                display: none;
-            }
-
-            /* Make tbody a column */
-            table tbody {
-                display: flex;
-                flex-direction: column;
-            }
-            table tbody tr {
-                margin-bottom: 8px; /* Add some space between rows */
-            }
-            .cartb {
-                position: relative;
-                left: -25px;
-            }
-            .cellNumber {
-                display: none;
-            }
-        }
-
-        /* Add more responsive styles as needed */
-    </style>
+	<link href="css/cafe.css" rel="stylesheet">
 </head>
 <body>
-    <header id="masthead" class="site-header header-v1"  style="background-image: none; ">
-                   <div class="col-full">
-                      <div class="header-wrap">
-                          <div class="site-branding">
-                             <a href="/" class="custom-logo-link" rel="home">
-                                <svg class="pizzaro-logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 52.39">
-                                   <path class="cls-1" d="M51.33,16.15A5.61,5.61,0,0,0,56,10.88a4,4,0,0,0-4.67-4,5.38,5.38,0,0,0-4.67,5.22A4.07,4.07,0,0,0,51.33,16.15ZM21.42,3.69C6.1,5.62,0,17.8,0,25.47a16.41,16.41,0,0,0,2.6,8.68l5.62-4.92A11,11,0,0,1,7,24.48c0-5.22,5-13,14.42-14.18,8.17-1,10.5,4.17,10.5,8.48,0,8.21-8.17,14.51-14.42,11.78l3.23-8.35A10.87,10.87,0,0,1,25,16.72l-1.54-4.39c-5.3.67-9,5.19-10.5,9.05L1.17,52.4,9.6,51.34l5.73-15.11C29.59,40.35,40,28.8,40,17.72,40,9.67,34.47,2.05,21.42,3.69ZM197,12.22c-2.17,4-4.77,6.3-7.37,7.06A25.1,25.1,0,0,0,192,9.22c0-6.18-3.55-9.47-10-8.66-8.82,1.11-13.92,9-15.71,15.8-4,7.28-6.48,10.81-7.94,11-0.74.09-2-.6,0.42-6.88l1.48-4a8,8,0,0,0,.64-2.74c0-4-6.52-6.16-8.7-7.81L154,1.49,150.53,0c-2.17,1-5,4.2-5,6.92a4,4,0,0,0,1.64,3c-1.54,3.6-3,6.83-4.19,9.06h0c-3.82,7-7.42,11.22-9.54,11.49-1,.12-1.86-0.57.53-6.89l6.58-17.14-9.92,4.87s-1.17-4.17-6.31-3.52c-6.81.86-11.07,8.78-13.14,15.62-3.48,6.34-6.05,7.74-8,8-2.7.34-4.67-1.38-7.11-1.45l15.54-16.19-2.76-3.33c-5.2,2.63-9.17.46-13.52,1-6.36.8-7.58,6.71-12,15.05h0c-3.61,6.74-6.26,8.19-8.22,8.44-2.7.34-4.67-1.38-7.11-1.45L83.56,17.34,80.81,14c-5.2,2.63-9.17.46-13.52,1-6.36.8-7.58,6.71-12,15.05h0c-3.76,7-7.42,11.22-9.54,11.49-0.9.11-1.86-.51,0.58-6.9l6.52-17.13L44.38,18.6l-6,15.62c-3.87,10.13-.48,13.54,4.35,12.94,6.1-.77,11.4-7.62,15.48-15.33h0c3.45-6.51,4.56-7.93,7-8.24,2.23-.28,4.19.48,5.83,0.6L54.51,41.31l2.76,3.33c5.57-5.28,7.05-.2,13.63-1,6.73-.85,11-7.09,15.43-15.32h0c3.45-6.51,4.56-7.93,7-8.24,2.23-.28,4.19.48,5.83,0.6L82.61,37.77l2.76,3.33c5.57-5.29,7.05-.2,13.63-1,4.39-.55,7.72-3.4,10.74-7.59,0.25,3.46,2.25,6,6,5.49,4.67-.59,8.32-5.47,8.32-5.47s0.69,4.34,6.2,3.64c6.47-.81,11.61-7.59,15.75-15.36h0a93.45,93.45,0,0,0,4.24-9.11c1.43,1,2.6,1.86,2.6,2.92a5.62,5.62,0,0,1-.48,1.93L150.64,21c-3.82,9.91.58,12.45,4.72,11.93s7.48-4.12,10.53-8.89c0.9,4.5,4.34,7,9.93,6.31a16.62,16.62,0,0,0,11.08-6.67c5.41-.25,10.23-4.43,13.1-9.75A3.52,3.52,0,0,0,197,12.22ZM125,26.2s-2.44,4.14-5.36,4.51c-1.06.13-1.7-.37-1.7-1.76,0-3.41,3.92-13.87,8.11-14.4,2.33-.29,2.39,2.68,2.39,2.68Zm57.9-12.09a4.93,4.93,0,0,0-4.51,4.83,3.79,3.79,0,0,0,1.17,2.84c-1.17,1.69-2.49,2.93-3.76,3.09S173.7,24,173.7,22.3c0-3.94,4.08-15.65,8.27-16.18C183.09,6,184,6.66,184,8.63A18.75,18.75,0,0,1,182.87,14.11Z" transform="translate(0 -0.01)"></path>
-                                </svg>
-                             </a>
-                          </div>
-                         <div style="position: absolute; right: 10%;">
-                            <button style="width: 100px; padding-left: 17px; padding-bottom: 5px;">
-                               <a href="#basket">
-                                   <script src="https://cdn.lordicon.com/lordicon.js"></script>
-<lord-icon
-    src="https://cdn.lordicon.com/lomfljuq.json"
-    trigger="morph"
-    state="morph-check-in-1"
-    colors="primary:#16c72e"
-    style="width:33px;height:33px; position: absolute; top: 51px">
-</lord-icon>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921zM17.307 15h-6.64l-2.5-6h11.39l-2.25 6z"></path><circle cx="10.5" cy="19.5" r="1.5"></circle><circle cx="17.5" cy="19.5" r="1.5"></circle></svg>
-                               </a>
-                            </button>
-                         </div>
-                      </div>
-                   </div>
-                </header>
-    <div class="cartb" style="width: 80%; margin: 0 auto">
-        <table>
-            <thead>
-                <tr>
-                    <th>Number</th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Add to Basket</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="product-item">
-                    <td>2</td>
-                    <td class="product-thumbnail">
-                        <img src="assets/images/products/p1.jpg" alt=""/>
-                    </td>
-                    <td class="product-name"  style="position: relative; padding: 5px; background: none">
-                        <a href="#">Bacon Burger 1</a>
-                        <p><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&#036;</span>20</span></p>
-                    </td>
-                    <td class="product-add-to-basket">
-                        <button style="position: relative; padding: 1px; background: none" onclick="addToBasket(this)"><script src="https://cdn.lordicon.com/lordicon.js"></script>
-<lord-icon
-    src="https://cdn.lordicon.com/zrkkrrpl.json"
-    trigger="hover"
-    style="width:40px;height:40px">
-</lord-icon></button>
-                    </td>
-                </tr>
-                <tr class="product-item">
-                    <td>2</td>
-                    <td class="product-thumbnail">
-                        <img src="assets/images/products/p1.jpg" alt=""/>
-                    </td>
-                    <td class="product-name"  style="position: relative; padding: 5px; background: none">
-                        <a href="#">Bacon Burger 2</a>
-                        <p><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&#036;</span>10</span></p>
-                    </td>
-                    <td class="product-add-to-basket">
-                        <button style="position: relative; padding: 1px; background: none" onclick="addToBasket(this)"><script src="https://cdn.lordicon.com/lordicon.js"></script>
-<lord-icon
-    src="https://cdn.lordicon.com/zrkkrrpl.json"
-    trigger="hover"
-    style="width:40px;height:40px">
-</lord-icon></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table><br><br>
-        <hr><br>
-        <h2 id="basket">Shopping Basket</h2>
-        <table id="shopping-basket">
-            <thead>
-                <tr>
-                    <th>Number</th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                    <th>Remove</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Basket items will be dynamically added here -->
-            </tbody>
-        </table><br><br><br>
+<section class="cafe-page cafe-items">
+	<div class="cafe-item js-item" data-item-id="1" data-item-price="4990">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Burger.tgs">
+				<img src="./img/Burger_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMjY4LDQ5OWMtNTEtMi0xMDYtMS0xNTMtMjItMjgtMTItMzktNDAtNDItNjgsMC00LDMtNywxLTEwLTUtNi0xNiwzLTEzLTE0LDItMTEsMTItMTQsMTEtMjcsMC0yLTUtMTItNS0xNiwwLTYsNS0xNyw0LTIyLTItNy05LTUtNi0xNSwzLTEwLDE0LTcsMTktMTMsNy0xMi0xNC0yNC0xNy0zMy0zLTEyLTEtMjgsMi0zOSwyOC0xMDEsMTQ4LTEzMywyMzktMTE1LDY0LDEzLDEzMCw1OSwxNDIsMTI3LDMsMTgsMCwzMi0xNSw0Mi0xLDEtMTEsMTMtNywxNiw0LDIsMjAsNCwyMiw5LDYsMTAtNywxNS05LDIyLTEsMywzLDExLDMsMTYsMCwyLTMsMTctMiwxOSwyLDIsOCwxLDEwLDQsMyw1LDQsMTYsNiwyMiw0LDEzLTE1LDIwLTE5LDI3LTksMjAsNSw0MC0yMyw2MC00MCwyOC0xMDEsMjktMTQ4LDMweiIvPjwvc3ZnPg==');"
+				     alt="Burger">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Burger</span>
+			<span class="cafe-item-price">$4.99</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="2" data-item-price="1490">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Fries.tgs">
+				<img src="./img/Fries_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMjUwLDQ3OGMtNTcsMS04OC00LTEzNS0zNi01LTQtNS0yOS01LTM1LTEwLTY5LTE5LTEzOS0yNi0yMDktMy0yOSwxNC0xMSwzMi0zMiw3Mi04NCwxOTQtODcsMjcxLTgsNCw1LDEwLDE1LDE2LDE4LDEsMSwyNCw0LDI0LDUsNywyMS0xNiwxNjctMjEsMTk4LTEsMTEtMSw1Ni05LDYyLTUzLDM4LTg2LDM4LTE0NywzN3oiLz48L3N2Zz4=');"
+				     alt="Fries">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Fries</span>
+			<span class="cafe-item-price">$1.49</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="3" data-item-price="3490">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Hotdog.tgs">
+				<img src="./img/Hotdog_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMzIwLDQ4N2MtNTgtMi0xMTAtNDAtMTUyLTc4LTU1LTQ4LTIyMC0yMzQtMTA1LTI5NCwxMS02LTEtNzcsNjUtNjcsNiwxLDI1LDgsMzEsMTIsMSwxLDIsOCwzLDksMTAsMywyMCwxLDMwLDYsNTIsMjUsODYsMTAyLDEzMCwxNDMsMzYsMzYsMTAwLDY0LDEyNywxMDQsMTIsMTgsNSwzNSwxMCw1Myw1LDE5LDE0LDMwLDQsNTEtMjQsNDktNjgsMTUtNzYsMTktNSwzLTQsMTAtNywxNC0xNCwyMC0zNywyOC02MCwyOHoiLz48L3N2Zz4=');"
+				     alt="Hotdog">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Hotdog</span>
+			<span class="cafe-item-price">$3.49</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="4" data-item-price="3990">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Tako.tgs">
+				<img src="./img/Tako_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMTE1LDQ3MmMtNjYsMi04Ny03NS05MC0xMjctNi0xMjEsNzMtMjYxLDE5Ni0yODksNDItMTAsODktNSwxMjgsMTYsOSw1LDE3LDE2LDI3LDIwLDE4LDgsMzksNCw1OCwxNSw0MiwyNiw2Nyw5Miw1MiwxNDAtMTIsMzktMTM4LDEwMC0xNzQsMTIwLTQyLDI1LTE1NSwxMDMtMTk4LDEwNXoiLz48L3N2Zz4=');"
+				     alt="Tako">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Tako</span>
+			<span class="cafe-item-price">$3.99</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="5" data-item-price="7990">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Pizza.tgs">
+				<img src="./img/Pizza_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMzc2LDQ4NGMtMzUtOC04NC0zOC0xMTAtNjMtMS0xLDEtNCwwLTUtNy0xMS0yMC0yMi0zMC0yOS01My00My0xMDAtOTItMTUyLTEzNy0xOS0xNi00OS04LTU5LTQxLTctMjIsMjQtNDcsMzctNjAsNzEtNzEsMTcwLTExNiwyNzAtMTI0LDE2LTEsNTEtNiw2NCw2LDIxLDIxLDEsNTMsMSw3NCwzLDY4LDMsMTM1LDEsMjAzLDEsMzAsMiwxNjMtMjIsMTc2eiIvPjwvc3ZnPg==');"
+				     alt="Pizza">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Pizza</span>
+			<span class="cafe-item-price">$7.99</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="6" data-item-price="1490">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Donut.tgs?1">
+				<img src="./img/Donut_148.png?1"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMjYxLDQ3OWMtNjYsMi0xMzItMTktMTc4LTY2LTc0LTc1LTgzLTIyNi05LTMwNCw2OS03MSwxODktOTAsMjgwLTU2LDg4LDM0LDEzOCwxMDUsMTMzLDIwMC04LDEzOS04MCwyMjQtMjI2LDIyNnoiLz48L3N2Zz4=');"
+				     alt="Donut">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Donut</span>
+			<span class="cafe-item-price">$1.49</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="7" data-item-price="1990">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Popcorn.tgs">
+				<img src="./img/Popcorn_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMjg4LDQ5N2MtMTUsMi0xNDYtNC0xNDktMTAtNy0xNi05LTM2LTEzLTUzLTEyLTUxLTIyLTEwMy0zMS0xNTQtNC0xNy0xNC00Ni05LTYyLDMtMTEsMTYtMTUsMTctMjQsMS04LTItMTQsNC0yMCw1LTUsMTctMTQsMjEtMjAsMS00LDAtOCwwLTEyLDAtMywzNy00MywzOS00Myw3LTMsMTMsMiwxOSwyLDQsMCw0LTgsOC05LDMtMiw4LTEsMTEtMywxNC01LDMwLTMwLDQ0LTI3LDcsMSwxMywyMCwxNSwxOSwxMS0yLDE3LTksMjktMywzLDEsNSw1LDgsNiwyMiwyLDExLTYsMjksMTUsNiw3LDE3LDMsMjMsMTAsNyw2LDEsMTQsNCwxOSwxLDEsMTEsNCwxNCw2LDksMTAsMTQsMzAsMTcsNDIsMSwxLDcsMiw4LDIsNiw0LDYsMTAsOSwxNCwyLDIsNywxLDEwLDYsOSwxOS0yMCwxMjMtMjYsMTQ5LTMsMTgtMTYsMTEwLTI2LDExOS0xMCw5LTMwLDI3LTQzLDMxLTksMi0yMiwwLTMyLDB6Ii8+PC9zdmc+');"
+				     alt="Popcorn">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Popcorn</span>
+			<span class="cafe-item-price">$1.99</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="8" data-item-price="1490">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Coke.tgs">
+				<img src="./img/Coke_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMjQ4LDUwNWMtODYsMC03OC00Ny04NS0xMTMtMi0yMC05LTE1Ny0xNS0xNjMtMTEtMTItMTItNy0xMC0yNiwwLTQsMS05LDMtMTIsMTYtMTYsOTMtMTgsOTUtMjEsNi05LTMtMjksMi00MCw4LTE2LDEwMi00MCwxMTAtMjcsMjAsMjktNzMsMjktODUsNDAtMiwyLTMsMjUtMSwyNywxNSwxMSw4OC02LDk2LDIyLDEwLDMxLTcsMjEtOSwzNy0yLDIxLTMsNDItNSw2NC0zLDI5LTgsMTczLTIyLDE4OC0xOSwxOS00OSwyNC03NCwyNHoiLz48L3N2Zz4=');"
+				     alt="Coke">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Coke</span>
+			<span class="cafe-item-price">$1.49</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="9" data-item-price="10990">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Cake.tgs">
+				<img src="./img/Cake_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNOTIsNDcyYy0zLDAtMTAsMS0xMy0yLTEwLTEyLTctOTQtOS0xMTQtMi0yMC0xOC0xMzgtOC0xNDgsMjktMjksNzgtNDYsMTE1LTY0LDIyLTExLDE2LTMwLDI5LTUwLDE2LTI0LDI4LTEyLDQ1LTIwLDEsMCwxLTEwLDQtMTIsNS00LDE3LDEzLDIxLDE1LDIsMSwyLTQsMy02LDEtMSw5LTksMTItNiw3LDgsMywxOCw3LDI1LDMsNSwyNyw3LDIxLDIwLTIsMywyNSwxMiwzMiwxNSwyNSwxMSw1MSwyMyw3NSwzNiwxNiw5LDM1LDE3LDQ3LDMyLDMxLDQwLDE1LDEyMSw5LDE2OC0yLDExLTIsNDctMTQsNTMtMzYsMTctMTI1LDIzLTE2NywzMC02OCwxMC0xNDAsMjgtMjA5LDI4eiIvPjwvc3ZnPg==');"
+				     alt="Cake">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Cake</span>
+			<span class="cafe-item-price">$10.99</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="10" data-item-price="5990">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Icecream.tgs">
+				<img src="./img/Icecream_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMjU2LDQ4NGMtMTctMi00NSwzLTU5LTktMTAtOS0xNy05NS0xNi0xMDgsMS0yNi0xMC0xMi0xNC0yMy0yLTYsNy0xMSw2LTE1LTItNy0xOC0xOC0yMi0yNi00LTctNC0yMC04LTI3LTgtMTEtMjMtMTItMjctMjktOS0zNiwyNS0zMywzMi00MywxMC0xNS0yLTMxLDEtNDgsNS0zMiw0Ny0zOCw3MC01MiwxNS05LDI5LTMxLDEwLTQ0LTgtNS0xNS0yLTIzLTUtMjMtOCw0NC0xMiw0NC0xMiwzOCwwLDkxLDE5LDk2LDYzLDIsMjEtMTMsMzgtMyw1OCwxLDQsNywzLDEwLDUsMTgsMTMsMjEsMzIsMTIsNTAsMCwxLDEyLDcsMTMsNyw3LDUsMTYsMTYsMTUsMjYtMiwxNy0yMiwxNC0yNywyNi00LDEwLTUsMjEtMTIsMzItMyw1LTE3LDE0LTE5LDE5LDEsMyw4LDksNywxNC0xLDYtMTAsMy0xMiw2LTQsOCwxLDE5LTEsMjctMiwxMi0xMyw5NS0yMSwxMDAtMTQsOC0zNyw3LTUyLDh6Ii8+PC9zdmc+');"
+				     alt="Icecream">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Icecream</span>
+			<span class="cafe-item-price">$5.99</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="11" data-item-price="3990">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Cookie.tgs">
+				<img src="./img/Cookie_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMjY5LDQ0MmMtNTIsMC0xMTMtMTUtMTUzLTQ5LTE2OS0xNDMsMzItMzkyLDIyMC0zMTcsMTk2LDc5LDEzOCwzNjEtNjcsMzY2eiIvPjwvc3ZnPg==');"
+				     alt="Cookie">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Cookie</span>
+			<span class="cafe-item-price">$3.99</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item js-item" data-item-id="12" data-item-price="7990">
+		<div class="cafe-item-counter js-item-counter">1</div>
+		<div class="cafe-item-photo">
+			<picture class="cafe-item-lottie js-item-lottie">
+				<source type="application/x-tgsticker" srcset="./img/tgs/Flan.tgs">
+				<img src="./img/Flan_148.png"
+				     style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iLTMwMCUiIHgyPSItMjAwJSIgeTE9IjAiIHkyPSIwIj48c3RvcCBvZmZzZXQ9Ii0xMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjMwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjcwJSIgc3RvcC1vcGFjaXR5PSIuMDciLz48c3RvcCBvZmZzZXQ9IjExMCUiIHN0b3Atb3BhY2l0eT0iLjEiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MSIgZnJvbT0iLTMwMCUiIHRvPSIxMjAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ4MiIgZnJvbT0iLTIwMCUiIHRvPSIxMzAwJSIgZHVyPSIzcyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2cpIiBkPSJNMjU0LDQzMWMtNjgtMS0xNDQtMTUtMTk1LTYzLTUyLTQ4LTUxLTExNSwyLTE2MywxOC0xNyw2NS0zNCw3NC00Miw4LTgsOS0yMSwxOS0yOSw0MC0zNiwxMjAtMzcsMTY5LTE5LDE2LDYsMzQsMTQsNDQsMjksNCw1LDQsMTMsOSwxOCw4LDksMzIsMTQsNDMsMjAsNDMsMjYsODMsNzEsNzEsMTI1LTIyLDk2LTE1MywxMjQtMjM3LDEyNHoiLz48L3N2Zz4=');"
+				     alt="Flan">
+			</picture>
+		</div>
+		<div class="cafe-item-label">
+			<span class="cafe-item-title">Flan</span>
+			<span class="cafe-item-price">$7.99</span>
+		</div>
+		<div class="cafe-item-buttons">
+			<button class="cafe-item-decr-button js-item-decr-btn button-item ripple-handler">
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+			<button class="cafe-item-incr-button js-item-incr-btn button-item ripple-handler">
+				<span class="button-item-label">Add</span>
+				<span class="ripple-mask"><span class="ripple"></span></span>
+			</button>
+		</div>
+	</div>
+	<div class="cafe-item-shadow"></div>
+	<div class="cafe-item-shadow"></div>
+	<div class="cafe-item-shadow"></div>
+	<div class="cafe-item-shadow"></div>
+</section>
 
-    </div>
-    <!-- Add your JavaScript code here -->
-    <script>
-        function addToBasket(button) {
-    var row = button.parentNode.parentNode;
-    var productInfo = row.querySelectorAll('.product-name a, .product-name p span');
-    var productName = productInfo[0].innerText;
-    var productPrice = parseFloat(productInfo[1].innerText.replace('$', ''));
-
-    var basketTable = document.getElementById('shopping-basket').getElementsByTagName('tbody')[0];
-    var existingRows = basketTable.getElementsByTagName('tr');
-
-    for (var i = 0; i < existingRows.length; i++) {
-        var existingRow = existingRows[i];
-        if (existingRow.cells[1].innerText === productName) {
-            var quantityInput = existingRow.cells[3].getElementsByTagName('input')[0];
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-            updateTotal(quantityInput);
-            return; // Exit function if product already exists in the basket
-        }
-    }
-
-    var newRow = basketTable.insertRow();
-    var cellNumber = newRow.insertCell(0);
-    var cellName = newRow.insertCell(1);
-    var cellPrice = newRow.insertCell(2);
-    var cellQuantity = newRow.insertCell(3);
-    var cellTotal = newRow.insertCell(4);
-    var cellRemove = newRow.insertCell(5);
-
-    cellNumber.innerHTML = basketTable.rows.length;
-    cellName.innerHTML = productName;
-    cellPrice.innerHTML = '$' + productPrice.toFixed(2);
-    cellQuantity.innerHTML = '<input type="number" style="position: relative; padding: 1px; background: none; width: 45px" value="1" min="1" onchange="updateTotal(this)">';
-    cellTotal.innerHTML = '$' + productPrice.toFixed(2);
-    cellRemove.innerHTML = '<button style="position: relative; padding: 1px; background: none" onclick="removeCartItem(this)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #c00a27;transform: ;msFilter:;"><path d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"></path><path d="M9 10h2v8H9zm4 0h2v8h-2z"></path></svg></button>';
-}
-
-        function removeCartItem(button) {
-            var row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-            updateBasketNumbers();
-        }
-
-        function updateTotal(input) {
-            var row = input.parentNode.parentNode;
-            var price = parseFloat(row.cells[2].innerText.replace('$', ''));
-            var quantity = parseInt(input.value);
-            var total = price * quantity;
-            row.cells[4].innerText = '$' + total.toFixed(2);
-        }
-
-        function updateBasketNumbers() {
-            var basketTable = document.getElementById('shopping-basket').getElementsByTagName('tbody')[0];
-            for (var i = 0; i < basketTable.rows.length; i++) {
-                basketTable.rows[i].cells[0].innerHTML = i + 1;
-            }
-        }
-    </script>
-
-      <!-- For demo purposes – can be removed on production : End -->
-      <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-      <script type="text/javascript" src="assets/js/tether.min.js"></script>
-      <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
-
-      <script type="text/javascript" src="assets/js/social.share.min.js"></script>
-      <script type="text/javascript" src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script type="text/javascript" src="assets/js/scripts.min.js"></script>
-      <!-- For demo purposes – can be removed on production -->
-      <script src="switchstylesheet/switchstylesheet.js"></script>
-     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-
-
-
-    <div id="picker"
-         style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%"></div>
+<div class="cafe-status-wrap">
+	<div class="cafe-status js-status"></div>
 </div>
-</body>
-<script type="text/javascript">
-    Telegram.WebApp.expand();
+<script src="https://tg.dev/js/jquery.min.js"></script>
+<script src="https://tg.dev/js/tgsticker.js?27"></script>
+<script src="js/cafe.js?version=<?php echo uniqid() ?>"></script>
+<script>
+    Cafe.init({
+        "apiUrl": "<?php echo $_ENV['REMOTE_PATH'] . '/telegram' ?>",
+        "userId": 0,
+        "userHash": null
+    });
 </script>
+</body>
 </html>
